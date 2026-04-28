@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -87,7 +87,7 @@ app.post('/api/time-logs', async (req, res) => {
 
 // ── DB + Export ───────────────────────────────────────────────────────────────
 let connected = false;
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (!connected) {
     try {
       await mongoose.connect(process.env.MONGO_URI);
