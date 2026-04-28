@@ -39,7 +39,7 @@ const DashboardStats = ({ onTabChange }) => {
         const { data } = await api.get('/dashboard/stats');
         setStats(data);
       } catch (err) {
-        setStats({ projects: 12, tasks: 48, hours: '124.5' });
+        setStats({ projects: 0, tasks: 0, hours: '0.0' });
       } finally {
         setLoading(false);
       }
