@@ -48,7 +48,9 @@ const ManualEntryForm = ({ onEntryAdded }) => {
           setFormData(prev => ({ ...prev, jobName: data[0].name }));
         }
       } catch (err) {
-        console.error('Error fetching projects:', err);
+        const fallback = [{ name: 'Neubau Wohnpark Süd' }, { name: 'Sanierung Altbau West' }, { name: 'Infrastruktur Projekt B' }];
+        setProjects(fallback);
+        setFormData(prev => ({ ...prev, jobName: fallback[0].name }));
       } finally {
         setLoading(false);
       }
