@@ -1,23 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// ── Debug ────────────────────────────────────────────────────────────────────
-app.get('/api/debug', (req, res) => {
-  res.json({
-    received_url: req.url,
-    received_path: req.path,
-    mongo_uri_set: !!process.env.MONGO_URI,
-    node_env: process.env.NODE_ENV,
-  });
-});
 
 // ── Models ───────────────────────────────────────────────────────────────────
 const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema(
@@ -97,7 +84,7 @@ app.post('/api/time-logs', async (req, res) => {
 
 // ── DB + Export ───────────────────────────────────────────────────────────────
 let connected = false;
-export default async (req, res) => {
+module.exports = async (req, res) => {
   if (!connected) {
     try {
       await mongoose.connect(process.env.MONGO_URI);
