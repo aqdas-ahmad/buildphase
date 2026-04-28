@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ── Models ──────────────────────────────────────────────────────────────────
+// ── Models ───────────────────────────────────────────────────────────────────
 const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema(
   { name: String, role: String, location: String }, { timestamps: true }
 ));
@@ -82,7 +85,7 @@ app.post('/api/time-logs', async (req, res) => {
   } catch (e) { res.status(500).json({ message: e.message }); }
 });
 
-// ── DB + Handler ─────────────────────────────────────────────────────────────
+// ── DB + Export ───────────────────────────────────────────────────────────────
 let connected = false;
 module.exports = async (req, res) => {
   if (!connected) {
